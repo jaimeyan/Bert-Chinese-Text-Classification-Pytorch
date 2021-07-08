@@ -28,28 +28,29 @@ all_data = []
 for file, number in zip(file_list, number_list):
     with open(r'EHR/' + file, 'r') as f:
         for line in f.readlines():
-            all_data.append((line.strip(), number))
+            if line.strip():
+                all_data.append((line.strip(), number))
 
-with open(r'EHR/all_data.txt', 'w') as f:
+with open(r'EHR/data/all_data.txt', 'w') as f:
     for i in all_data:
         f.write(i[0] + '\t' + str(i[1]) + '\n')
 
-print(all_data)
+
 train_list, rest_list = data_split(all_data, 0.6)
 test_list, dev_list = data_split(rest_list, 0.5)
 
-with open(r'EHR/all_data.txt', 'w') as f:
+with open(r'EHR/data/all_data.txt', 'w') as f:
     for i in all_data:
         f.write(i[0] + '\t' + str(i[1]) + '\n')
 
-with open(r'EHR/dev.txt', 'w') as f:
+with open(r'EHR/data/dev.txt', 'w') as f:
     for i in dev_list:
         f.write(i[0] + '\t' + str(i[1]) + '\n')
 
-with open(r'EHR/test.txt', 'w') as f:
+with open(r'EHR/data/test.txt', 'w') as f:
     for i in test_list:
         f.write(i[0] + '\t' + str(i[1]) + '\n')
 
-with open(r'EHR/train.txt', 'w') as f:
+with open(r'EHR/data/train.txt', 'w') as f:
     for i in train_list:
         f.write(i[0] + '\t' + str(i[1]) + '\n')
