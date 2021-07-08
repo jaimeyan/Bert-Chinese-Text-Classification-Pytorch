@@ -1,6 +1,6 @@
 # coding: UTF-8
 import numpy as np
-import torch
+import torch, os
 import torch.nn as nn
 import torch.nn.functional as F
 from sklearn import metrics
@@ -62,6 +62,8 @@ def train(config, model, train_iter, dev_iter, test_iter):
                 dev_acc, dev_loss = evaluate(config, model, dev_iter)
                 if dev_loss < dev_best_loss:
                     dev_best_loss = dev_loss
+                    if not os.path.exists('/'.join(config.save_path.split('/')[:-1])):
+                        os.makedirs('/'.join(config.save_path.split('/')[:-1]))
                     torch.save(model.state_dict(), config.save_path)
                     improve = '*'
                     last_improve = total_batch
