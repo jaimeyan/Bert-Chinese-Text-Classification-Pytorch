@@ -1,0 +1,4 @@
+individual_history
+marriage&childbirth_history
+family_history
+past_history
